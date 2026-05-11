@@ -1,5 +1,5 @@
 import amqplib, { type Channel } from 'amqplib'
-import type { FastifyBaseLogger } from 'fastify'
+import type { AppLogger } from '../shared/types'
 import { env } from '../config/env'
 
 let channel: Channel
@@ -8,7 +8,7 @@ export const QUEUES = {
   BOOK_ADDED: 'book.added',
 } as const
 
-export async function connectRabbitMQ(logger: FastifyBaseLogger): Promise<void> {
+export async function connectRabbitMQ(logger: AppLogger): Promise<void> {
   try {
     const connection = await amqplib.connect(env.RABBITMQ_URL)
     channel = await connection.createChannel()

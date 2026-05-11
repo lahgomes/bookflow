@@ -5,6 +5,7 @@ import { jwtPlugin } from './plugins/jwt.plugin'
 import { AppError } from './shared/errors'
 import { authRoutes } from './modules/auth/auth.routes'
 import { booksRoutes } from './modules/books/books.routes'
+import { collectionRoutes } from './modules/collection/collection.routes'
 
 export function buildApp() {
   const app = Fastify({
@@ -22,6 +23,7 @@ export function buildApp() {
   app.register(jwtPlugin)
   app.register(authRoutes)
   app.register(booksRoutes)
+  app.register(collectionRoutes)
 
   app.setErrorHandler((rawError, request, reply) => {
     const error = rawError as FastifyError & AppError
