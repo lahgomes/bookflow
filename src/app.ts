@@ -3,7 +3,7 @@ import { corsPlugin } from './plugins/cors.plugin'
 import { swaggerPlugin } from './plugins/swagger.plugin'
 import { jwtPlugin } from './plugins/jwt.plugin'
 import { AppError } from './shared/errors'
-import { authRoutes } from './modules/auth/auth.routes'
+import { booksRoutes } from './modules/books/books.routes'
 
 export function buildApp() {
   const app = Fastify({
@@ -19,7 +19,7 @@ export function buildApp() {
   app.register(corsPlugin)
   app.register(swaggerPlugin)
   app.register(jwtPlugin)
-  app.register(authRoutes)
+  app.register(booksRoutes)
 
   app.setErrorHandler((rawError, request, reply) => {
     const error = rawError as FastifyError & AppError
