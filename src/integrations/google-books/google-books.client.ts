@@ -1,4 +1,4 @@
-import type { FastifyBaseLogger } from 'fastify'
+import type { AppLogger } from '../../shared/types'
 import { env } from '../../config/env'
 import type { GoogleBooksApiResponse, GoogleBooksVolume } from './google-books.types'
 import { googleBooksMapper } from './google-books.mapper'
@@ -15,7 +15,7 @@ function buildUrl(path: string, params: Record<string, string>): string {
 }
 
 export const googleBooksClient = {
-  async search(query: string, logger: FastifyBaseLogger): Promise<Book[]> {
+  async search(query: string, logger: AppLogger): Promise<Book[]> {
     const start = Date.now()
     const url = buildUrl('/volumes', { q: query, maxResults: '20', langRestrict: 'pt' })
 
@@ -48,7 +48,7 @@ export const googleBooksClient = {
     return googleBooksMapper.toBookList(data.items)
   },
 
-  async getById(googleId: string, logger: FastifyBaseLogger): Promise<Book | null> {
+  async getById(googleId: string, logger: AppLogger): Promise<Book | null> {
     const start = Date.now()
     const url = buildUrl(`/volumes/${googleId}`, {})
 

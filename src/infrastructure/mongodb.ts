@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
-import type { FastifyBaseLogger } from 'fastify'
+import type { AppLogger } from '../shared/types'
 import { env } from '../config/env'
 
-export async function connectMongoDB(logger: FastifyBaseLogger): Promise<void> {
+export async function connectMongoDB(logger: AppLogger): Promise<void> {
   try {
     await mongoose.connect(env.MONGODB_URI)
     logger.info({ event: 'mongodb_connected' })
